@@ -15,7 +15,7 @@ from sympy import sympify
 
 def limit_diff(M_self, X, i, j, x_zero): #i e j são as coordenadas atuais (Fj(x) e dxi)
         #X = dx, M_self = F(x)
-        h = 0.01
+        h = 1e-5
         n = 0
         f_xis = M_self
         for x in range(0, X.shape[0]):
@@ -63,7 +63,7 @@ def matrix_z(M_self, X, x_zero, matriz_um):
 def check_diff(maz):
         n = 0
         for x in range(0, matriz_um.shape[0]):
-            if abs(maz[n]) > 1e-5:
+            if abs(maz[n]) > 1e-4:
                 return 0
             n = n + 1
         return 1
@@ -87,9 +87,10 @@ for x in range(0, n_exp):
     M[n] = f
     n = n + 1
 
-
+interacoes = 0
 flag = 0
 while(1):
+    interacoes = interacoes + 1
     n = 0
     matrix_X = Matrix(n_exp, 1, lambda i,j: i+j)
     for x in range(0, n_exp):
@@ -118,3 +119,4 @@ while(1):
         flag = flag + 1
 
 print(x_zero)
+print(interacoes)
